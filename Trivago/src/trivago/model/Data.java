@@ -82,15 +82,27 @@ public class Data {
         
         return lista;
     }
-    
-    public List<Hotel> getHotel(String filtro){
+
+    public List<Hotel> getHoteles(String filtro) throws SQLException{
         List<Hotel> lista = new ArrayList<>();
         
         String query = "SELECT * FROM hotel WHERE(nombre LIKE"
-                + "'%"+filtro+"%' OR ciudad LIKE '%"+filtro"%')";
+                + "'%"+filtro+"%' OR ciudad LIKE '"+filtro+"')";
+        
         ResultSet rs = con.ejecutar(query);
         
-        
+        while(rs.next()){
+            Hotel hot = new Hotel();
+            
+            hot.setId(rs.getInt(1));
+            hot.setNombre(rs.getString(2));
+            hot.setCiudad(rs.getString(3));
+            hot.setPrecio_por_noche(rs.getInt(4));
+            
+            lista.add(hot);
+        }
+        con.close();
+        return lista;
     }
         
 }
