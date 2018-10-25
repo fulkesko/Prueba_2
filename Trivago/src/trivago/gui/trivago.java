@@ -220,7 +220,7 @@ public class trivago extends javax.swing.JFrame {
     private void btnRegistrarHotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarHotelActionPerformed
         String nombre, ciudad;
         int precio;
-        
+
         //rescato 
         nombre = txtNombre.getText();
         ciudad = txtCiudad.getText();
@@ -231,7 +231,7 @@ public class trivago extends javax.swing.JFrame {
         h.setNombre(nombre);
         h.setCiudad(ciudad);
         h.setPrecio_por_noche(precio);
-        
+
         try {
             d.crearHotel(h);
         } catch (SQLException ex) {
@@ -241,17 +241,15 @@ public class trivago extends javax.swing.JFrame {
         txtNombre.setText(null);
         txtPrecio.setText(null);
         txtNombre.requestFocus();
-        
-        
+
         JOptionPane.showMessageDialog(this, "Hotel Creado");
-       
 
 
     }//GEN-LAST:event_btnRegistrarHotelActionPerformed
 
     private void txtBuscarHotelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarHotelKeyTyped
         String filtro = txtBuscarHotel.getText();
-        
+
         try {
             List<Hotel> lista = d.getHoteles(filtro);
             TMHoteles model = new TMHoteles(lista);
@@ -259,6 +257,7 @@ public class trivago extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
+        cargarTablahotel();
     }//GEN-LAST:event_txtBuscarHotelKeyTyped
 
     /**
@@ -316,8 +315,13 @@ public class trivago extends javax.swing.JFrame {
     private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 
-
-    private void cargarTablaCiudad() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void cargarTablahotel() {
+        try {
+            List<Hotel> lista = d.getHotel();
+            TMHoteles model = new TMHoteles(lista);
+            tblHoteles.setModel(model);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }
 }
