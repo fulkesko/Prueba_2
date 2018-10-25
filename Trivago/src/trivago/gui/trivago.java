@@ -26,7 +26,8 @@ public class trivago extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Hotel Trivago");
-
+        
+        lblCantidad.setText("4");
     }
 
     @SuppressWarnings("unchecked")
@@ -271,7 +272,7 @@ public class trivago extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("WIndows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -324,4 +325,6 @@ public class trivago extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }
+
+  
 }
