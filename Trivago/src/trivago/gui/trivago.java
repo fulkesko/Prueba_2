@@ -53,11 +53,6 @@ public class trivago extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        txtBuscarHotel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscarHotelActionPerformed(evt);
-            }
-        });
         txtBuscarHotel.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtBuscarHotelKeyTyped(evt);
@@ -130,10 +125,6 @@ public class trivago extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Promedio de precios:");
-
-        lblCantidad.setText("asda1");
-
-        lblPrecios.setText("asas2");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -227,30 +218,46 @@ public class trivago extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarHotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarHotelActionPerformed
+        String nombre, ciudad;
+        int precio;
+        
+        //rescato 
+        nombre = txtNombre.getText();
+        ciudad = txtCiudad.getText();
+        precio = Integer.parseInt(txtPrecio.getText());
+
+        Hotel h = new Hotel();
+
+        h.setNombre(nombre);
+        h.setCiudad(ciudad);
+        h.setPrecio_por_noche(precio);
+        
         try {
-            registrar();
+            d.crearHotel(h);
         } catch (SQLException ex) {
             Logger.getLogger(trivago.class.getName()).log(Level.SEVERE, null, ex);
         }
+        txtCiudad.setText(null);
+        txtNombre.setText(null);
+        txtPrecio.setText(null);
+        txtNombre.requestFocus();
+        
+        
+        JOptionPane.showMessageDialog(this, "Hotel Creado");
+       
 
 
     }//GEN-LAST:event_btnRegistrarHotelActionPerformed
 
-    private void txtBuscarHotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarHotelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscarHotelActionPerformed
-
     private void txtBuscarHotelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarHotelKeyTyped
-
         String filtro = txtBuscarHotel.getText();
-
+        
         try {
-            List<Hotel> lista = (List<Hotel>) d.getHotel(filtro);
+            List<Hotel> lista = d.getHoteles(filtro);
             TMHoteles model = new TMHoteles(lista);
             tblHoteles.setModel(model);
-            System.out.println("paso");
         } catch (SQLException ex) {
-            Logger.getLogger(trivago.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_txtBuscarHotelKeyTyped
 
@@ -309,35 +316,6 @@ public class trivago extends javax.swing.JFrame {
     private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 
-    private void registrar() throws SQLException {
-        
-        String nombre, ciudad;
-        int precio;
-        
-        //rescato 
-        nombre = txtNombre.getText();
-        ciudad = txtCiudad.getText();
-        precio = Integer.parseInt(txtPrecio.getText());
-
-        Hotel ht = new Hotel();
-
-        ht.setNombre(nombre);
-        ht.setCiudad(ciudad);
-        ht.setPrecio_por_noche(precio);
-        /*try{
-        d.crearHotel(ht);
-        
-        txtCiudad.setText(null);
-        txtNombre.setText(null);
-        txtPrecio.setText(null);
-        
-        txtNombre.requestFocus();
-        cargarTablaCiudad();
-        JOptionPane.showMessageDialog(this, "Hotel Creado");
-       }catch (SQLException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage());
-            }*/
-    }
 
     private void cargarTablaCiudad() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

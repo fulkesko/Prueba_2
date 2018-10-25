@@ -10,8 +10,8 @@ public class Conexion {
     private Statement sen;
     private final Connection con;
 
-    public Conexion(String bd) throws ClassNotFoundException, SQLException {
-        String url = "jdbc:mysql://localhost/" + bd + "?user=root&password=";
+    public Conexion(String bd_trivago) throws ClassNotFoundException, SQLException {
+        String url = "jdbc:mysql://localhost/" + bd_trivago + "?user=root&password=";
         System.out.println(url);
         Class.forName("com.mysql.jdbc.Driver");
         con = DriverManager.getConnection(url);

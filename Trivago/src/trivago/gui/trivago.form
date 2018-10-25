@@ -81,7 +81,6 @@
       <SubComponents>
         <Component class="javax.swing.JTextField" name="txtBuscarHotel">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtBuscarHotelActionPerformed"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtBuscarHotelKeyTyped"/>
           </Events>
         </Component>
@@ -256,14 +255,8 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblCantidad">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="asda1"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblPrecios">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="asas2"/>
-              </Properties>
             </Component>
           </SubComponents>
         </Container>
