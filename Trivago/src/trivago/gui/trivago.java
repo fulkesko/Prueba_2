@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import trivago.model.Data;
 import trivago.model.Hotel;
 import trivago.model.tableModel.TMHoteles;
@@ -226,7 +227,11 @@ public class trivago extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarHotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarHotelActionPerformed
-        registrar();
+        try {
+            registrar();
+        } catch (SQLException ex) {
+            Logger.getLogger(trivago.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
 
     }//GEN-LAST:event_btnRegistrarHotelActionPerformed
@@ -304,8 +309,8 @@ public class trivago extends javax.swing.JFrame {
     private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 
-    private void registrar() {
-        System.out.println("paso ");
+    private void registrar() throws SQLException {
+        
         String nombre, ciudad;
         int precio;
         
@@ -319,5 +324,22 @@ public class trivago extends javax.swing.JFrame {
         ht.setNombre(nombre);
         ht.setCiudad(ciudad);
         ht.setPrecio_por_noche(precio);
+        try{
+        d.crearHotel(ht);
+        
+        txtCiudad.setText(null);
+        txtNombre.setText(null);
+        txtPrecio.setText(null);
+        
+        txtNombre.requestFocus();
+        cargarTablaCiudad();
+        JOptionPane.showMessageDialog(this, "Hotel Creado");
+       }catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+    }
+
+    private void cargarTablaCiudad() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
