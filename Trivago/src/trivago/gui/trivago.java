@@ -5,13 +5,18 @@
  */
 package trivago.gui;
 
+import trivago.model.Data;
+import trivago.model.Hotel;
+
 /**
  *
  * @author Flavio
  */
 public class trivago extends javax.swing.JFrame {
+    private Data d;
     public trivago() {
         initComponents();
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -91,6 +96,11 @@ public class trivago extends javax.swing.JFrame {
         );
 
         btnRegistrarHotel.setText("Registrar Hotel");
+        btnRegistrarHotel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarHotelActionPerformed(evt);
+            }
+        });
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Estadísticas"));
 
@@ -194,6 +204,23 @@ public class trivago extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRegistrarHotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarHotelActionPerformed
+       String nombre, ciudad;
+        int precio;
+
+        //rescato 
+        nombre = txtNombre.getText();
+        ciudad = txtNombre.getText();
+        precio = Integer.parseInt(txtPrecio.getText());
+
+        Hotel ht = new Hotel();
+        
+        ht.setNombre(nombre);
+        ht.setCiudad(ciudad);
+        ht.setPrecio_por_noche(precio);
+       
+    }//GEN-LAST:event_btnRegistrarHotelActionPerformed
 
     /**
      * @param args the command line arguments
