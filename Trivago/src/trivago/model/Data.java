@@ -38,6 +38,14 @@ public class Data {
         
         
     }
+    
+    public void crearHotel (Hotel h) throws SQLException{
+        String insert = "INSERT INTO hotel VALUES "
+                + "(NULL, '"+ h.getNombre() +"',"
+                + "'" + h.getCiudad() + "',"
+                + "'" + h.getPrecio_por_noche() +"')";
+        con.ejecutar(insert);
+    }
 }
   
 
