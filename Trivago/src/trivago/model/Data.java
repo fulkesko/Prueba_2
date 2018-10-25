@@ -1,14 +1,15 @@
-package trivago.model.bd;
+package trivago.model;
 
 import trivago.model.bd.Conexion;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import trivago.model.Hotel;
+import trivago.model.bd.Conexion;
 
-public class data {
+public class Data {
     private Conexion con;
     
-    public data() throws ClassNotFoundException, SQLException{
+    public Data() throws ClassNotFoundException, SQLException{
         con = new Conexion("bd_trivago");
     }
         
