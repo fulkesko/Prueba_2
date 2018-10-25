@@ -15,7 +15,7 @@ public class Data {
     }
 
     public Hotel getHotel(String nombre) throws SQLException {
-        String query = "SELECT * FROM hotel WHERE nombre = '" + nombre + "'";
+        String query = "SELECT * FROM hotel WHERE nombre = '"+nombre+"'";
         Hotel nom = null;
         ResultSet rs = con.ejecutar(query);
         if (rs.next()) {
@@ -32,7 +32,7 @@ public class Data {
         return nom;
     }
     public Hotel getCiudad(String ciudad) throws SQLException {
-        String query = "SELECT * FROM hotel WHERE ciudad = '" + ciudad + "'";
+        String query = "SELECT * FROM hotel WHERE ciudad = '"+ciudad+"'";
         Hotel ciu = null;
         ResultSet rs = con.ejecutar(query);
         if (rs.next()) {

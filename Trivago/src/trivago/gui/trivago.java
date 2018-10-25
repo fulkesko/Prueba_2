@@ -18,14 +18,14 @@ import trivago.model.tableModel.TMHoteles;
  * @author Flavio
  */
 public class trivago extends javax.swing.JFrame {
+
     private Data d;
-    
-    
+
     public trivago() {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Hotel Trivago");
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -226,21 +226,9 @@ public class trivago extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarHotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarHotelActionPerformed
-       String nombre, ciudad;
-        int precio;
+        registrar();
 
-        //rescato 
-        nombre = txtNombre.getText();
-        ciudad = txtNombre.getText();
-        precio = Integer.parseInt(txtPrecio.getText());
 
-        Hotel ht = new Hotel();
-        
-        ht.setNombre(nombre);
-        ht.setCiudad(ciudad);
-        ht.setPrecio_por_noche(precio);
-        System.out.println("paso ");
-       
     }//GEN-LAST:event_btnRegistrarHotelActionPerformed
 
     private void txtBuscarHotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarHotelActionPerformed
@@ -248,19 +236,10 @@ public class trivago extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarHotelActionPerformed
 
     private void txtBuscarHotelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarHotelKeyTyped
-         /*  String filtro = txtBuscar.getText();
-        
-        try {
-            List<Producto> lista = d.getProductos(filtro);
-            TMProducto model = new TMProducto(lista);
-            tabProductos.setModel(model);
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-        */
+
         String filtro = txtBuscarHotel.getText();
-        
-        try{
+
+        try {
             List<Hotel> lista = (List<Hotel>) d.getHotel(filtro);
             TMHoteles model = new TMHoteles(lista);
             tblHoteles.setModel(model);
@@ -324,4 +303,21 @@ public class trivago extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
+
+    private void registrar() {
+        System.out.println("paso ");
+        String nombre, ciudad;
+        int precio;
+        
+        //rescato 
+        nombre = txtNombre.getText();
+        ciudad = txtNombre.getText();
+        precio = Integer.parseInt(txtPrecio.getText());
+
+        Hotel ht = new Hotel();
+
+        ht.setNombre(nombre);
+        ht.setCiudad(ciudad);
+        ht.setPrecio_por_noche(precio);
+    }
 }
