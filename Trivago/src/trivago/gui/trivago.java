@@ -316,7 +316,7 @@ public class trivago extends javax.swing.JFrame {
         
         //rescato 
         nombre = txtNombre.getText();
-        ciudad = txtNombre.getText();
+        ciudad = txtCiudad.getText();
         precio = Integer.parseInt(txtPrecio.getText());
 
         Hotel ht = new Hotel();
@@ -324,7 +324,7 @@ public class trivago extends javax.swing.JFrame {
         ht.setNombre(nombre);
         ht.setCiudad(ciudad);
         ht.setPrecio_por_noche(precio);
-        try{
+        /*try{
         d.crearHotel(ht);
         
         txtCiudad.setText(null);
@@ -336,7 +336,7 @@ public class trivago extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Hotel Creado");
        }catch (SQLException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
-            }
+            }*/
     }
 
     private void cargarTablaCiudad() {
