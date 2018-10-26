@@ -235,11 +235,11 @@ public class trivago extends javax.swing.JFrame {
         h.setCiudad(ciudad);
         h.setPrecio_por_noche(precio);
 
-        try {
+       /* try {
             d.crearHotel(h);
         } catch (SQLException ex) {
             Logger.getLogger(trivago.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }error de mierda en la data*/
         txtCiudad.setText(null);
         txtNombre.setText(null);
         txtPrecio.setText(null);
@@ -327,6 +327,7 @@ public class trivago extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }
-
+   
+    
   
 }
