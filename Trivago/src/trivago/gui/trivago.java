@@ -15,10 +15,6 @@ import trivago.model.Hotel;
 import trivago.model.tableModel.TMHoteles;
 import trivago.model.bd.Conexion;
 
-/**
- *
- * @author Flavio
- */
 public class trivago extends javax.swing.JFrame {
 
     private Data d;
@@ -236,11 +232,11 @@ public class trivago extends javax.swing.JFrame {
         h.setCiudad(ciudad);
         h.setPrecio_por_noche(precio);
 
-       /* try {
+        /*try {
             d.crearHotel(h);
         } catch (SQLException ex) {
             Logger.getLogger(trivago.class.getName()).log(Level.SEVERE, null, ex);
-        }error de mierda en la data*/
+        }error de mierda en la data;*/
         txtCiudad.setText(null);
         txtNombre.setText(null);
         txtPrecio.setText(null);
