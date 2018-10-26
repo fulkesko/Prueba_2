@@ -252,18 +252,16 @@ public class trivago extends javax.swing.JFrame {
         String nombre, ciudad;
         //if (!nombre.trim().isEmpty())
         int precio;
-        nombre = null;
-        ciudad = null;
-        precio = 0;
-           
-        //rescato 
+        nombre = "";
+        ciudad = "";
         nombre = txtNombre.getText();
         ciudad = txtCiudad.getText();
-        precio = Integer.parseInt(txtPrecio.getText());
-        
-        if (!nombre.trim().isEmpty() && !ciudad.trim().isEmpty() && precio != 0 ) {
+        //rescato 
+        if (!nombre.trim().isEmpty() && !ciudad.trim().isEmpty()) {
+
+            precio = Integer.parseInt(txtPrecio.getText());
             Hotel h = new Hotel();
-            
+
             h.setNombre(nombre);
             h.setCiudad(ciudad);
             h.setPrecio_por_noche(precio);
@@ -288,8 +286,7 @@ public class trivago extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Hotel Creado");
 
         } else {
-            JOptionPane.showConfirmDialog(this,
-                    "ingrese un datos para registrar", "alerta", JOptionPane.YES_OPTION);
+            JOptionPane.showMessageDialog(this, "ingrese un datos para registrar", "alerta", JOptionPane.YES_OPTION);
         }
     }//GEN-LAST:event_btnRegistrarHotelActionPerformed
 
