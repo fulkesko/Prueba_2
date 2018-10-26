@@ -85,9 +85,9 @@ public class Data {
     public List<Hotel> getHoteles(String filtro) throws SQLException {
         List<Hotel> lista = new ArrayList<>();
 
-        String query = "SELECT * FROM hotel WHERE(nombre LIKE '%" +filtro+ "%' "
-                         + "OR ciudad LIKE '%" + filtro + "%')"
-                         + " ORDER BY precio_por_noche DESC;";
+        String query = "SELECT * FROM hotel WHERE(nombre LIKE '%" + filtro + "%' "
+                + "OR ciudad LIKE '%" + filtro + "%')"
+                + " ORDER BY precio_por_noche DESC;";
 
         ResultSet rs = con.ejecutar(query);
 
@@ -104,13 +104,27 @@ public class Data {
         con.close();
         return lista;
     }
-    private void contarHoteles() throws SQLException{
-        int contHoteles = 0;
-        
+
+    /*
+  
+     */
+    public int contarHoteles() throws SQLException {
+        int cont = 0;
         ResultSet rs = con.ejecutar("SELECT COUNT(0) FROM hotel");
-        
-        
-    
+        if (rs.next()) {
+            cont = rs.getInt(1);
+        }
+        return cont;
+
+    }
+    public int precioPromedio() throws SQLException{
+        int preP = 0;
+        ResultSet rs = con.ejecutar("SELECT AVG(precio_por_noche) FROM hotel");
+        if (rs.next()){
+            preP = rs.getInt(1);
+            
+        }
+        return preP;
     }
 
     public Hotel getHotelByNOMBRE(String nombre) throws SQLException {
