@@ -81,7 +81,7 @@ public class Data {
         List<Hotel> lista = new ArrayList<>();
         
         String query = "SELECT * FROM hotel WHERE(nombre LIKE"
-                + "'%" + filtro + "%' OR ciudad LIKE '" + filtro + "')";
+                + "'%" + filtro + "%' AND ciudad LIKE '" + filtro + "')";
         
         ResultSet rs = con.ejecutar(query);
         
