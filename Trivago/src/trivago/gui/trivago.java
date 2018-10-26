@@ -6,6 +6,7 @@
 package trivago.gui;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,8 +36,7 @@ public class trivago extends javax.swing.JFrame {
         
         setLocationRelativeTo(null);
         setTitle("Hotel Trivago");
-        
-        lblCantidad.setText("4");
+        cargarTablahotel();
     }
 
     @SuppressWarnings("unchecked")
@@ -64,8 +64,8 @@ public class trivago extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         txtBuscarHotel.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtBuscarHotelKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarHotelKeyReleased(evt);
             }
         });
 
@@ -253,25 +253,16 @@ public class trivago extends javax.swing.JFrame {
         txtNombre.setText(null);
         txtPrecio.setText(null);
         txtNombre.requestFocus();
+        cargarTablahotel();
 
         JOptionPane.showMessageDialog(this, "Hotel Creado");
 
 
     }//GEN-LAST:event_btnRegistrarHotelActionPerformed
 
-    private void txtBuscarHotelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarHotelKeyTyped
-        String filtro = txtBuscarHotel.getText();
-
-        try {
-            List<Hotel> lista = d.getHoteles(filtro);
-            TMHoteles model = new TMHoteles(lista);
-            tblHoteles.setModel(model);
-            pnlPrincipal.updateUI();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-        cargarTablahotel();
-    }//GEN-LAST:event_txtBuscarHotelKeyTyped
+    private void txtBuscarHotelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarHotelKeyReleased
+        buscar();
+    }//GEN-LAST:event_txtBuscarHotelKeyReleased
 
     /**
      * @param args the command line arguments
@@ -337,7 +328,20 @@ public class trivago extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }
+   private void buscar(){
+       String filtro = txtBuscarHotel.getText();
+       
+        try {
+            List<Hotel> lista = d.getHoteles(filtro);
+            TMHoteles model = new TMHoteles(lista);
+            tblHoteles.setModel(model);
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+        
    
+   }
     
   
 }
