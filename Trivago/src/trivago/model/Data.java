@@ -117,48 +117,34 @@ public class Data {
         return cont;
 
     }
-    public int precioPromedio() throws SQLException{
+
+    public int precioPromedio() throws SQLException {
         int preP = 0;
         ResultSet rs = con.ejecutar("SELECT AVG(precio_por_noche) FROM hotel");
-        if (rs.next()){
+        if (rs.next()) {
             preP = rs.getInt(1);
-            
+
         }
         return preP;
     }
 
-    public Hotel getHotelByNOMBRE(String nombre) throws SQLException {
-        Hotel hot = null;
-
-        ResultSet rs = con.ejecutar("SELECT * FROM producto WHERE nombre = '" + nombre + "'");
-
+    public String precioMenor() throws SQLException {
+        String hotelBarato = null;
+        ResultSet rs = con.ejecutar("SELECT nombre FROM hotel WHERE precio_por_noche = (SELECT MIN(precio_por_noche) FROM hotel)");
         if (rs.next()) {
-            hot = new Hotel();
-
-            hot.setId(rs.getInt(1));
-            hot.setNombre(rs.getString(2));
-            hot.setCiudad(rs.getString(3));
-            hot.setPrecio_por_noche(rs.getInt(4));
+            hotelBarato = rs.getString(1);
         }
-        con.close();
-        return hot;
+        return hotelBarato;
 
     }
 
-    public Hotel getHotelByCIUDAD(String ciudad) throws SQLException {
-        Hotel hot = null;
-
-        ResultSet rs = con.ejecutar("SELECT * FROM producto WHERE ciudad = '" + ciudad + "'");
-
+    public String precioMenorNombre() throws SQLException {
+        String hotel = null;
+        ResultSet rs = con.ejecutar("SELECT MIN(precio_por_noche) FROM hotel");
         if (rs.next()) {
-            hot = new Hotel();
-
-            hot.setId(rs.getInt(1));
-            hot.setNombre(rs.getString(2));
-            hot.setCiudad(rs.getString(3));
-            hot.setPrecio_por_noche(rs.getInt(4));
+            hotel = rs.getString(1);
         }
-        con.close();
-        return hot;
+        return hotel;
     }
+
 }

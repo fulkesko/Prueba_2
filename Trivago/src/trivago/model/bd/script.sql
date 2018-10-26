@@ -21,3 +21,5 @@ SELECT * FROM hotel ORDER BY precio_por_noche DESC;
 SELECT COUNT(0) FROM hotel;
 
 SELECT AVG(precio_por_noche) FROM hotel;
+
+SELECT nombre FROM hotel WHERE precio_por_noche = (SELECT MIN(precio_por_noche) FROM hotel);

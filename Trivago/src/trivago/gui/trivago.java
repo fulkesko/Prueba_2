@@ -57,6 +57,9 @@ public class trivago extends javax.swing.JFrame {
         lblCantidad = new javax.swing.JLabel();
         lblPrecios = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        lblHotelMasBarato = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        lblPrecioPorNoche = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblHoteles = new javax.swing.JTable();
 
@@ -138,6 +141,9 @@ public class trivago extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("Hotel mas barato:");
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel7.setText("Precio por noche: ");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -146,17 +152,19 @@ public class trivago extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(10, 10, 10)
-                        .addComponent(lblPrecios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblCantidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel6))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblHotelMasBarato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblPrecios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblPrecioPorNoche, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -171,8 +179,14 @@ public class trivago extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(lblPrecios, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(lblHotelMasBarato, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(lblPrecioPorNoche, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         tblHoteles.setModel(new javax.swing.table.DefaultTableModel(
@@ -236,33 +250,47 @@ public class trivago extends javax.swing.JFrame {
 
     private void btnRegistrarHotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarHotelActionPerformed
         String nombre, ciudad;
+        //if (!nombre.trim().isEmpty())
         int precio;
-
+        nombre = null;
+        ciudad = null;
+        precio = 0;
+           
         //rescato 
         nombre = txtNombre.getText();
         ciudad = txtCiudad.getText();
         precio = Integer.parseInt(txtPrecio.getText());
+        
+        if (!nombre.trim().isEmpty() && !ciudad.trim().isEmpty() && precio != 0 ) {
+            Hotel h = new Hotel();
+            
+            h.setNombre(nombre);
+            h.setCiudad(ciudad);
+            h.setPrecio_por_noche(precio);
 
-        Hotel h = new Hotel();
+            try {
+                d.crearHotel(h);
+            } catch (SQLException ex) {
+                Logger.getLogger(trivago.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            txtCiudad.setText(null);
+            txtNombre.setText(null);
+            txtPrecio.setText(null);
+            txtNombre.requestFocus();
+            pnlPrincipal.updateUI();
+            cargarTablahotel();
 
-        h.setNombre(nombre);
-        h.setCiudad(ciudad);
-        h.setPrecio_por_noche(precio);
+            try {
+                setContador();
+            } catch (SQLException ex) {
+                Logger.getLogger(trivago.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            JOptionPane.showMessageDialog(this, "Hotel Creado");
 
-        try {
-            d.crearHotel(h);
-        } catch (SQLException ex) {
-            Logger.getLogger(trivago.class.getName()).log(Level.SEVERE, null, ex);
+        } else {
+            JOptionPane.showConfirmDialog(this,
+                    "ingrese un datos para registrar", "alerta", JOptionPane.YES_OPTION);
         }
-        txtCiudad.setText(null);
-        txtNombre.setText(null);
-        txtPrecio.setText(null);
-        txtNombre.requestFocus();
-        cargarTablahotel();
-
-        JOptionPane.showMessageDialog(this, "Hotel Creado");
-
-
     }//GEN-LAST:event_btnRegistrarHotelActionPerformed
 
     private void txtBuscarHotelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarHotelKeyReleased
@@ -312,10 +340,13 @@ public class trivago extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCantidad;
+    private javax.swing.JLabel lblHotelMasBarato;
+    private javax.swing.JLabel lblPrecioPorNoche;
     private javax.swing.JLabel lblPrecios;
     private javax.swing.JPanel pnlPrincipal;
     private javax.swing.JTable tblHoteles;
@@ -349,10 +380,12 @@ public class trivago extends javax.swing.JFrame {
     }
 
     private void setContador() throws SQLException {
-       
-        lblCantidad.setText(""+d.contarHoteles()+"");
-        lblPrecios.setText("$ "+d.precioPromedio()+"");
+
+        lblCantidad.setText("" + d.contarHoteles() + "");
+        lblPrecios.setText("$ " + d.precioPromedio() + "");
+        lblHotelMasBarato.setText("" + d.precioMenor() + "");
+        lblPrecioPorNoche.setText("" + d.precioMenorNombre() + "");
+
     }
-    
 
 }
