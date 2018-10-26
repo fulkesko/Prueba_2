@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import trivago.model.Data;
 import trivago.model.Hotel;
 import trivago.model.tableModel.TMHoteles;
+import trivago.model.bd.Conexion;
 
 /**
  *

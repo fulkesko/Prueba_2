@@ -10,12 +10,18 @@ import trivago.model.bd.Conexion;
 public class Data {
     
     private Conexion con;
-    private String ciudad;
-    
+        
     public Data() throws ClassNotFoundException, SQLException {
         con = new Conexion("bd_trivago");
     }
-    
+    public void crearHotel(Hotel h) throws SQLException {
+        String insert = "INSERT INTO hotel VALUES "
+                + "(NULL, '" + h.getNombre() + "', "
+                + "'" + h.getCiudad() + "', "
+                + "'" + h.getPrecio_por_noche() + "')";
+        con.ejecutar(insert);
+        con.close();
+    }   
     public Hotel getHotel(String nombre) throws SQLException {
         String query = "SELECT * FROM hotel WHERE nombre = '" + nombre + "'";
         Hotel nom = null;
@@ -28,12 +34,10 @@ public class Data {
             nom.setCiudad(rs.getString("ciudad"));
             nom.setPrecio_por_noche(rs.getInt("precio_por_noche"));
         }
-        
         con.close();
         
         return nom;
     }
-    
     public Hotel getCiudad(String ciudad) throws SQLException {
         String query = "SELECT * FROM hotel WHERE ciudad = '" + ciudad + "'";
         Hotel ciu = null;
@@ -51,16 +55,6 @@ public class Data {
         
         return ciu;
     }
-    
-    public void crearHotel(Hotel h) throws SQLException {
-        String insert = "INSERT INTO hotel VALUES "
-                + "(NULL, '" + h.getNombre() + "', "
-                + "'" + h.getCiudad() + "', "
-                + "'" + h.getPrecio_por_noche() + "')";
-        con.ejecutar(insert);
-        con.close();
-    }
-    
     public List<Hotel> getHotel() throws SQLException {
         List<Hotel> lista = new ArrayList<>();
         
@@ -83,7 +77,6 @@ public class Data {
         
         return lista;
     }
-    
     public List<Hotel> getHoteles(String filtro) throws SQLException {
         List<Hotel> lista = new ArrayList<>();
         
@@ -105,7 +98,6 @@ public class Data {
         con.close();
         return lista;
     }
-    
     public Hotel getHotelByNOMBRE(String nombre) throws SQLException {
         Hotel hot = null;
         
@@ -123,8 +115,7 @@ public class Data {
         return hot;
         
     }
-    
-    public Hotel getHotelByCIUDAD(String nombre) throws SQLException {
+    public Hotel getHotelByCIUDAD(String ciudad) throws SQLException {
         Hotel hot = null;
         
         ResultSet rs = con.ejecutar("SELECT * FROM producto WHERE ciudad = '" + ciudad + "'");
@@ -140,5 +131,4 @@ public class Data {
         con.close();
         return hot;
     }
-    
 }
