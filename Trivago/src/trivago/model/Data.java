@@ -113,6 +113,7 @@ public class Data {
         ResultSet rs = con.ejecutar("SELECT COUNT(0) FROM hotel");
         if (rs.next()) {
             cont = rs.getInt(1);
+            System.out.println(cont);
         }
         return cont;
 
@@ -128,21 +129,23 @@ public class Data {
         return preP;
     }
 
-    public String precioMenor() throws SQLException {
+    public String getPrecioMenor() throws SQLException {
         String hotelBarato = null;
         ResultSet rs = con.ejecutar("SELECT nombre FROM hotel WHERE precio_por_noche = (SELECT MIN(precio_por_noche) FROM hotel)");
         if (rs.next()) {
             hotelBarato = rs.getString(1);
+            System.out.println(hotelBarato);
         }
         return hotelBarato;
 
     }
 
-    public String precioMenorNombre() throws SQLException {
+    public String getPrecioMenorNombre() throws SQLException {
         String hotel = null;
         ResultSet rs = con.ejecutar("SELECT MIN(precio_por_noche) FROM hotel");
         if (rs.next()) {
             hotel = rs.getString(1);
+            System.out.println(hotel);
         }
         return hotel;
     }
